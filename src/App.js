@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react'
+import userImage from "./images/user.png"
+import assistantImage from "./images/robot.avif"
 
 const App = () => {
   const [ value, setValue] = useState("");
@@ -67,6 +69,16 @@ const App = () => {
     }
   }
 
+  const handleImage = (role) => {
+    if (role === "user") {
+      //display user profile
+      return userImage
+    } else {
+      //display robot profile
+      return assistantImage
+    }
+  }
+
   const currentChat = previousChats.filter(previousChats => previousChats.title === currentTitle)
   const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)))
   console.log(uniqueTitles)
@@ -85,7 +97,7 @@ const App = () => {
         {!currentTitle && <h1>ChattyGPT</h1>}
         <ul className="feed">
           {currentChat?.map((chatMessage, index) => <li key={index}>
-            <p className="role">{chatMessage.role}</p>
+            <img alt="role-pic" className="role" src={handleImage(chatMessage.role)}></img>
             <p>{chatMessage.content}</p>
           </li>)}
         </ul>

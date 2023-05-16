@@ -119,16 +119,23 @@ input:focus {
   background-color: #444654;
   width: 100%;
   padding: 20px;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .feed p {
   color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   text-align: left;
-  margin-right: 5px;
+  margin-right: 5vh;
+  margin-left: 2vh;
 }
 
 .feed p.role {
   min-width: 100px;
+}
+
+.feed img {
+  max-width: 5vh;
+  max-height: 5vh;
+  align-self: center;
 }
