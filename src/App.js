@@ -60,6 +60,12 @@ const App = () => {
     }
   }, [message, currentTitle])
 
+  const handleKey = (e) => {
+    if (e.keyCode === 13) {
+      getMessages()
+    }
+  }
+
   const currentChat = previousChats.filter(previousChats => previousChats.title === currentTitle)
   const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)))
   console.log(uniqueTitles)
@@ -84,7 +90,7 @@ const App = () => {
         </ul>
         <div className="bottom-section">
             <div className="input-container">
-              <input value={value} onChange={(e) => setValue(e.target.value)}/>
+              <input id ="input" value={value} onChange={(e) => setValue(e.target.value)} onKeyDown={handleKey}/>
               <div id="submit" onClick={getMessages}>➢</div>
             </div>
             <p className="info">
