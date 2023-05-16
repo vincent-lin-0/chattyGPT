@@ -57,6 +57,7 @@ const App = () => {
           }
         ]
       ))
+      setValue("")
     }
   }, [message, currentTitle])
 
