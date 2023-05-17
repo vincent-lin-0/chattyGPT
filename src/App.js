@@ -42,7 +42,7 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log(currentTitle, value, message)
+    //console.log(currentTitle, value, message)
     if (!currentTitle && value !== "" && message) {
       setCurrentTitle(value)
     }
@@ -61,6 +61,7 @@ const App = () => {
           }
         ]
       ))
+      talk(message.content)
       setValue("")
     }
   }, [message, currentTitle])
@@ -83,7 +84,7 @@ const App = () => {
 
   const currentChat = previousChats.filter(previousChats => previousChats.title === currentTitle)
   const uniqueTitles = Array.from(new Set(previousChats.map(previousChat => previousChat.title)))
-  console.log(uniqueTitles)
+  //console.log(uniqueTitles)
 
   const [microphone, setMicrophone] = useState(<FontAwesomeIcon icon={faMicrophoneSlash} size='2x'></FontAwesomeIcon>);
 
@@ -102,18 +103,24 @@ const App = () => {
   }
 
   recognition.onstart = function () {
-    console.log("active")
+    //console.log("active")
     setMicrophone(<FontAwesomeIcon icon={faMicrophone} size='4x' style={{color:"red"}}></FontAwesomeIcon>)
   }
 
   recognition.onend = function () {
-    console.log("disconnected")
+    //console.log("disconnected")
     setMicrophone(<FontAwesomeIcon icon={faMicrophoneSlash} size='2x'></FontAwesomeIcon>)
   }
 
   recognition.onresult = function (event) {
     const transcript = event.results[0][0].transcript
     setValue(transcript)
+  }
+
+  const talk = (text) => {
+    const sayMessage = new SpeechSynthesisUtterance(text)
+    const synth = window.speechSynthesis;
+    synth.speak(sayMessage)
   }
   
   return (
